@@ -23,6 +23,7 @@
 }
 .home {
     margin-right: 30px;
+    cursor: pointer;
 }
 .container {
     display: flex;

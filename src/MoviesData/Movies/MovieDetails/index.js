@@ -29,7 +29,7 @@ const MovieDetails = () => {
                 : [...actorNameArray],
         []
     );
-    console.log(directorName, "director");
+
     const {
         poster_path,
         title,
@@ -73,17 +73,23 @@ const MovieDetails = () => {
                         <span className={styles.text}> {runtime} min </span>
                     </div>
                     <div className={styles.description}>
-                        <span className={styles.cast}>Director :</span>
+                        <span className={styles.cast}>Director : </span>
                         {(directorName || []).map((director) => {
                             return (
-                                <span className={styles.name}>{director},</span>
+                                <span key={director} className={styles.text}>
+                                    {director},
+                                </span>
                             );
                         })}
                     </div>
                     <div className={styles.description}>
                         <span className={styles.cast}>Cast : </span>
                         {(actorName || []).map((name) => {
-                            return <span className={styles.text}>{name},</span>;
+                            return (
+                                <span key={name} className={styles.text}>
+                                    {name},
+                                </span>
+                            );
                         })}
                     </div>
                     <div className={styles.description}>

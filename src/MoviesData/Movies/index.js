@@ -12,7 +12,7 @@ const Movies = () => {
         searchInput,
     });
     const { results: searchedMovieData = [] } = searchData || {};
-    const [filteredData, setFilterdData] = useState([]);
+    const [filteredData, setFilterdData] = useState(results);
 
     useEffect(() => {
         if (searchInput?.trim() !== "") {
@@ -20,7 +20,7 @@ const Movies = () => {
         } else {
             setFilterdData(results);
         }
-    }, [results, searchInput, searchedMovieData]);
+    }, [searchInput, searchedMovieData]);
 
     const navigate = useNavigate();
 
