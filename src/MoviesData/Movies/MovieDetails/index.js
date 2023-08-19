@@ -11,7 +11,12 @@ const MovieDetails = () => {
     const { state = {} } = location || {};
     const { id: movieId } = state;
 
-    const { searchResult = {}, creditData = {} } = useGetSelectedMovie({
+    const {
+        searchResult = {},
+        creditData = {},
+        loadingSearchResult = false,
+        creditDataLoading = false,
+    } = useGetSelectedMovie({
         movieId,
     });
     const { crew = [], cast = [] } = creditData;
@@ -56,42 +61,68 @@ const MovieDetails = () => {
             </div>
             <div className={styles.description_container}>
                 <div className={styles.poster_container}>
-                    <img
-                        src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-                        alt={title}
-                        className={styles.poster}
-                    />
+                    {loadingSearchResult ? (
+                        "Loading..."
+                    ) : (
+                        <img
+                            src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+                            alt={title}
+                            className={styles.poster}
+                        />
+                    )}
                 </div>
                 <div className={styles.details}>
-                    <div className={styles.title}>
-                        <h3>{title} </h3>
-                        <h4 className={styles.name}> ({vote_average}/10)</h4>
-                    </div>
-                    <div className={styles.title}>
-                        <span className={styles.text}>{release_date}</span>
-                        <span className={styles.vr} />
-                        <span className={styles.text}> {runtime} min </span>
-                    </div>
-                    <div className={styles.description}>
-                        <span className={styles.cast}>Director : </span>
-                        {(directorName || []).map((director) => {
-                            return (
-                                <span key={director} className={styles.text}>
-                                    {director},
-                                </span>
-                            );
-                        })}
-                    </div>
-                    <div className={styles.description}>
-                        <span className={styles.cast}>Cast : </span>
-                        {(actorName || []).map((name) => {
-                            return (
-                                <span key={name} className={styles.text}>
-                                    {name},
-                                </span>
-                            );
-                        })}
-                    </div>
+                    {loadingSearchResult ? (
+                        "Loading..."
+                    ) : (
+                        <div className={styles.title}>
+                            <h3>{title} </h3>
+                            <h4 className={styles.name}>
+                                {" "}
+                                ({vote_average}/10)
+                            </h4>
+                        </div>
+                    )}
+                    {loadingSearchResult ? (
+                        "Loading..."
+                    ) : (
+                        <div className={styles.title}>
+                            <span className={styles.text}>{release_date}</span>
+                            <span className={styles.vr} />
+                            <span className={styles.text}> {runtime} min </span>
+                        </div>
+                    )}
+                    {creditDataLoading ? (
+                        "Loading..."
+                    ) : (
+                        <div className={styles.description}>
+                            <span className={styles.cast}>Director : </span>
+                            {(directorName || []).map((director) => {
+                                return (
+                                    <span
+                                        key={director}
+                                        className={styles.text}
+                                    >
+                                        {director},
+                                    </span>
+                                );
+                            })}
+                        </div>
+                    )}
+                    {creditDataLoading ? (
+                        "Loading..."
+                    ) : (
+                        <div className={styles.description}>
+                            <span className={styles.cast}>Cast : </span>
+                            {(actorName || []).map((name) => {
+                                return (
+                                    <span key={name} className={styles.text}>
+                                        {name},
+                                    </span>
+                                );
+                            })}
+                        </div>
+                    )}
                     <div className={styles.description}>
                         <span className={styles.cast}> Description : </span>
                         <span className={styles.name}>{overview}</span>

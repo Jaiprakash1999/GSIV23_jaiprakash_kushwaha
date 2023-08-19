@@ -33,6 +33,7 @@ const useGetSearchMovie = ({ searchInput }) => {
     return {
         searchData,
         searchDataLoading,
+        query,
     };
 };
 export default useGetSearchMovie;

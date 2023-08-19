@@ -5,22 +5,22 @@ import useGetSearchMovie from "./hook/useGetSearchMovie";
 import { useNavigate } from "react-router-dom";
 
 const Movies = () => {
-    const { data = {} } = useGetMovieList();
+    const { data = {}, movieListLoading = false } = useGetMovieList();
     const { results = [] } = data;
     const [searchInput, setSearchInput] = useState("");
-    const { searchData } = useGetSearchMovie({
+    const { searchData, query } = useGetSearchMovie({
         searchInput,
     });
     const { results: searchedMovieData = [] } = searchData || {};
     const [filteredData, setFilterdData] = useState(results);
 
     useEffect(() => {
-        if (searchInput?.trim() !== "") {
+        if (query?.trim() !== "") {
             setFilterdData(searchedMovieData);
         } else {
             setFilterdData(results);
         }
-    }, [searchInput, searchedMovieData]);
+    }, [query, filteredData, results, searchedMovieData]);
 
     const navigate = useNavigate();
 
@@ -64,37 +64,44 @@ const Movies = () => {
                 </div>
             </header>
             <div className={styles.movie_container}>
-                {filteredData?.map((movie) => {
-                    const { id, vote_average, title, poster_path, overview } =
-                        movie || {};
-                    return (
-                        <div
-                            key={id}
-                            className={styles.movie_card}
-                            onClick={() => handleProfile(id)}
-                        >
-                            <div>
-                                <img
-                                    src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-                                    alt={title}
-                                    className={styles.image}
-                                />
-                            </div>
-                            <div className={styles.bottom}>
-                                <div className={styles.heading}>
-                                    <div>{title}</div>
-                                    <div>{vote_average}/10</div>
-                                </div>
-                                <div>
-                                    <div>{`${overview.substring(
-                                        0,
-                                        70
-                                    )} ...`}</div>
-                                </div>
-                            </div>
-                        </div>
-                    );
-                })}
+                {movieListLoading
+                    ? "Loading..."
+                    : (filteredData || [])?.map((movie) => {
+                          const {
+                              id,
+                              vote_average,
+                              title,
+                              poster_path,
+                              overview,
+                          } = movie || {};
+                          return (
+                              <div
+                                  key={id}
+                                  className={styles.movie_card}
+                                  onClick={() => handleProfile(id)}
+                              >
+                                  <div>
+                                      <img
+                                          src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+                                          alt={title}
+                                          className={styles.image}
+                                      />
+                                  </div>
+                                  <div className={styles.bottom}>
+                                      <div className={styles.heading}>
+                                          <div>{title}</div>
+                                          <div>{vote_average}/10</div>
+                                      </div>
+                                      <div>
+                                          <div>{`${overview.substring(
+                                              0,
+                                              70
+                                          )} ...`}</div>
+                                      </div>
+                                  </div>
+                              </div>
+                          );
+                      })}
             </div>
         </div>
     );

@@ -24,7 +24,7 @@ const useGetMovieList = () => {
 
     return {
         data,
-        loading,
+        movieListLoading: loading,
     };
 };
 
