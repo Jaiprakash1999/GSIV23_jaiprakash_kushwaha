@@ -1,9 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import Pagination from "../Pagination";
-import styles from "../styles.module.css";
+import styles from "./styles.module.css";
 import useGetSearchMovie from "../hook/useGetSearchMovie";
 import useGetMovieList from "../hook/useGetMovieList";
-import style from "./styles.module.css";
 
 const MoviesContainer = ({ searchInput }) => {
     const navigate = useNavigate();
@@ -86,7 +85,7 @@ const MoviesContainer = ({ searchInput }) => {
                                             <div>
                                                 <div
                                                     className={
-                                                        style.desktop_view_description
+                                                        styles.desktop_view_description
                                                     }
                                                 >{`${overview.substring(
                                                     0,
@@ -94,7 +93,7 @@ const MoviesContainer = ({ searchInput }) => {
                                                 )} ...`}</div>
                                                 <div
                                                     className={
-                                                        style.mobile_view_description
+                                                        styles.mobile_view_description
                                                     }
                                                 >{`${overview.substring(
                                                     0,
