@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 import useGetSelectedMovie from "../hook/useGetSelectedMovie";
+import { formattedTime } from "./formatedTime";
 const MovieDetails = () => {
     const navigate = useNavigate();
     const handleProfile = () => {
@@ -89,7 +90,10 @@ const MovieDetails = () => {
                             <span className={styles.name}>{release_date}</span>
                             <span className={styles.vr} />
                             <strong>Runtime : </strong>
-                            <span className={styles.name}> {runtime} min </span>
+                            <span className={styles.name}>
+                                {" "}
+                                {formattedTime(runtime)} min{" "}
+                            </span>
                         </div>
 
                         <div className={styles.description}>
