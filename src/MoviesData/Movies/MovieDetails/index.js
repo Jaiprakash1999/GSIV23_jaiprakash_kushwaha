@@ -84,7 +84,7 @@ const MovieDetails = () => {
                             </h4>
                         </div>
 
-                        <div className={styles.title}>
+                        <div>
                             <strong>Release Date : </strong>
                             <span className={styles.name}>{release_date}</span>
                             <span className={styles.vr} />

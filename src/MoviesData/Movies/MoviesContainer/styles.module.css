@@ -1,0 +1,12 @@
+.mobile_view_description {
+    display: none;
+    @media (max-width: 768px) {
+        display: contents;
+    }
+}
+.desktop_view_description {
+    display: contents;
+    @media (max-width: 768px) {
+        display: none;
+    }
+}
