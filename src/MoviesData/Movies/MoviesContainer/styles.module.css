@@ -24,7 +24,7 @@
     background: #dfdfde;
     box-shadow: 0px 0px 8px 0px rgba(98, 127, 172, 0.2);
     @media (max-width: 768px) {
-        left: 80px;
+        left: 86px;
     }
 }
 .movie_container {
