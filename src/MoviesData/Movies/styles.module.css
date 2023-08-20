@@ -57,6 +57,7 @@
 }
 .home {
     margin-right: 30px;
+    cursor: pointer;
 }
 .image {
     height: 290px;
