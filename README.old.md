@@ -6,7 +6,7 @@
 3. npm i
  
 4. install the below dependencies :
-5. 
+   
   a. npm install lodash
   b. npm install axios
   c. npm install react-router-dom
