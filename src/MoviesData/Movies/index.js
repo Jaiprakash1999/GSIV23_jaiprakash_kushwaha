@@ -1,32 +1,9 @@
-import React, { useEffect, useState } from "react";
-import useGetMovieList from "./hook/useGetMovieList";
+import React, { useState } from "react";
 import styles from "./styles.module.css";
-import useGetSearchMovie from "./hook/useGetSearchMovie";
-import { useNavigate } from "react-router-dom";
+import MoviesContainer from "./MoviesContainer";
 
 const Movies = () => {
-    const { data = {}, movieListLoading = false } = useGetMovieList();
-    const { results = [] } = data;
     const [searchInput, setSearchInput] = useState("");
-    const { searchData, query } = useGetSearchMovie({
-        searchInput,
-    });
-    const { results: searchedMovieData = [] } = searchData || {};
-    const [filteredData, setFilterdData] = useState(results);
-
-    useEffect(() => {
-        if (query?.trim() !== "") {
-            setFilterdData(searchedMovieData);
-        } else {
-            setFilterdData(results);
-        }
-    }, [query, filteredData, results, searchedMovieData]);
-
-    const navigate = useNavigate();
-
-    const handleProfile = (id) => {
-        navigate("/movieDetails", { state: { id } });
-    };
 
     return (
         <div className={styles.container}>
@@ -63,46 +40,7 @@ const Movies = () => {
                     </svg>
                 </div>
             </header>
-            <div className={styles.movie_container}>
-                {movieListLoading
-                    ? "Loading..."
-                    : (filteredData || [])?.map((movie) => {
-                          const {
-                              id,
-                              vote_average,
-                              title,
-                              poster_path,
-                              overview,
-                          } = movie || {};
-                          return (
-                              <div
-                                  key={id}
-                                  className={styles.movie_card}
-                                  onClick={() => handleProfile(id)}
-                              >
-                                  <div>
-                                      <img
-                                          src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-                                          alt={title}
-                                          className={styles.image}
-                                      />
-                                  </div>
-                                  <div className={styles.bottom}>
-                                      <div className={styles.heading}>
-                                          <div>{title}</div>
-                                          <div>{vote_average}/10</div>
-                                      </div>
-                                      <div>
-                                          <div>{`${overview.substring(
-                                              0,
-                                              70
-                                          )} ...`}</div>
-                                      </div>
-                                  </div>
-                              </div>
-                          );
-                      })}
-            </div>
+            <MoviesContainer searchInput={searchInput} />
         </div>
     );
 };

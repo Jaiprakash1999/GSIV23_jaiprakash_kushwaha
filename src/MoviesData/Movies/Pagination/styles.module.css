@@ -1,0 +1,13 @@
+.icon {
+    box-shadow: 0px 0px 8px 0px rgba(98, 127, 172, 0.2);
+    background: #ffff;
+    border: none;
+    border-radius: 4px;
+    padding: 6px 6px 4px 6px;
+}
+.text {
+    margin: 0 12px;
+}
+.icon:disabled {
+    background: #dfdfde;
+}

@@ -70,3 +70,17 @@
 .heading {
     margin-left: 12px;
 }
+.loader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 200px;
+    left: 340px;
+    padding: 16px;
+    border-radius: 4px;
+    width: 50%;
+    background: #dfdfde;
+    box-shadow: 0px 0px 8px 0px rgba(98, 127, 172, 0.2);
+}

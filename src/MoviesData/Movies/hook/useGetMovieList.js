@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 const useGetMovieList = () => {
     const [data, setData] = useState({});
     const [loading, setLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState(1);
 
     const getMovieList = async () => {
         try {
             const response = await axios.get(
-                `https://api.themoviedb.org/3/movie/upcoming?api_key=be3ee1b68f89d61c2300f82023585fbc`
+                `https://api.themoviedb.org/3/movie/upcoming?api_key=be3ee1b68f89d61c2300f82023585fbc&page=${currentPage}`
             );
             setData(response.data);
             setLoading(false);
@@ -20,11 +21,13 @@ const useGetMovieList = () => {
 
     useEffect(() => {
         getMovieList();
-    }, []);
+    }, [currentPage]);
 
     return {
         data,
         movieListLoading: loading,
+        currentPage,
+        setCurrentPage,
     };
 };
 

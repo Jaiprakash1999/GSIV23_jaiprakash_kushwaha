@@ -59,22 +59,22 @@ const MovieDetails = () => {
                     </svg>
                 </div>
             </div>
-            <div className={styles.description_container}>
-                <div className={styles.poster_container}>
-                    {loadingSearchResult ? (
-                        "Loading..."
-                    ) : (
+
+            {loadingSearchResult || creditDataLoading ? (
+                <div className={styles.loader}>
+                    <strong>Loading...</strong>
+                </div>
+            ) : (
+                <div className={styles.description_container}>
+                    <div className={styles.poster_container}>
                         <img
                             src={`https://image.tmdb.org/t/p/w500${poster_path}`}
                             alt={title}
                             className={styles.poster}
                         />
-                    )}
-                </div>
-                <div className={styles.details}>
-                    {loadingSearchResult ? (
-                        "Loading..."
-                    ) : (
+                    </div>
+
+                    <div className={styles.details}>
                         <div className={styles.title}>
                             <h3>{title} </h3>
                             <h4 className={styles.name}>
@@ -82,19 +82,13 @@ const MovieDetails = () => {
                                 ({vote_average}/10)
                             </h4>
                         </div>
-                    )}
-                    {loadingSearchResult ? (
-                        "Loading..."
-                    ) : (
+
                         <div className={styles.title}>
                             <span className={styles.text}>{release_date}</span>
                             <span className={styles.vr} />
                             <span className={styles.text}> {runtime} min </span>
                         </div>
-                    )}
-                    {creditDataLoading ? (
-                        "Loading..."
-                    ) : (
+
                         <div className={styles.description}>
                             <span className={styles.cast}>Director : </span>
                             {(directorName || []).map((director) => {
@@ -108,10 +102,7 @@ const MovieDetails = () => {
                                 );
                             })}
                         </div>
-                    )}
-                    {creditDataLoading ? (
-                        "Loading..."
-                    ) : (
+
                         <div className={styles.description}>
                             <span className={styles.cast}>Cast : </span>
                             {(actorName || []).map((name) => {
@@ -122,13 +113,14 @@ const MovieDetails = () => {
                                 );
                             })}
                         </div>
-                    )}
-                    <div className={styles.description}>
-                        <span className={styles.cast}> Description : </span>
-                        <span className={styles.name}>{overview}</span>
+
+                        <div className={styles.description}>
+                            <span className={styles.cast}> Description : </span>
+                            <span className={styles.name}>{overview}</span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 };
