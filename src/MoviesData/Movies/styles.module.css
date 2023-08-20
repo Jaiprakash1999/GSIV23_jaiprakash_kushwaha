@@ -23,11 +23,6 @@
     margin-right: 4px;
     border: none;
 }
-
-.heading {
-    display: flex;
-    justify-content: space-between;
-}
 .home {
     margin-right: 30px;
     cursor: pointer;

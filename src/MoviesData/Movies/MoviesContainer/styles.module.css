@@ -10,6 +10,10 @@
         display: none;
     }
 }
+.heading {
+    display: flex;
+    justify-content: space-between;
+}
 .no_data {
     display: flex;
     flex-direction: column;
