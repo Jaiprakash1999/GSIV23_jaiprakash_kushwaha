@@ -42,6 +42,7 @@ const MovieDetails = () => {
         overview,
         runtime,
         vote_average,
+        genres = [],
     } = searchResult;
 
     return (
@@ -84,13 +85,26 @@ const MovieDetails = () => {
                         </div>
 
                         <div className={styles.title}>
-                            <span className={styles.text}>{release_date}</span>
+                            <strong>Release Date : </strong>
+                            <span className={styles.name}>{release_date}</span>
                             <span className={styles.vr} />
-                            <span className={styles.text}> {runtime} min </span>
+                            <strong>Runtime : </strong>
+                            <span className={styles.name}> {runtime} min </span>
                         </div>
 
                         <div className={styles.description}>
-                            <span className={styles.cast}>Director : </span>
+                            <strong>Genre : </strong>
+                            {genres.map((item) => {
+                                return (
+                                    <spna key={item.id} className={styles.text}>
+                                        {item.name},
+                                    </spna>
+                                );
+                            })}
+                        </div>
+
+                        <div className={styles.description}>
+                            <strong>Director : </strong>
                             {(directorName || []).map((director) => {
                                 return (
                                     <span
@@ -104,7 +118,7 @@ const MovieDetails = () => {
                         </div>
 
                         <div className={styles.description}>
-                            <span className={styles.cast}>Cast : </span>
+                            <strong>Cast : </strong>
                             {(actorName || []).map((name) => {
                                 return (
                                     <span key={name} className={styles.text}>
@@ -115,7 +129,7 @@ const MovieDetails = () => {
                         </div>
 
                         <div className={styles.description}>
-                            <span className={styles.cast}> Description : </span>
+                            <strong> Description : </strong>
                             <span className={styles.name}>{overview}</span>
                         </div>
                     </div>

@@ -53,17 +53,17 @@
     align-items: center;
     height: 16px;
     width: 1px;
-    margin-right: 4px;
+    margin: 0 4px;
     background: #4a4a4a;
 }
 .name {
     color: #4a4a4a;
     margin-left: 2px;
 }
-.cast {
+/* .cast {
     font-weight: 900;
     font-size: 18px;
-}
+} */
 .description {
     margin-top: 12px;
 }
