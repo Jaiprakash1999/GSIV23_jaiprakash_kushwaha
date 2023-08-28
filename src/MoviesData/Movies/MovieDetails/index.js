@@ -17,10 +17,18 @@ const MovieDetails = () => {
         creditData = {},
         loadingSearchResult = false,
         creditDataLoading = false,
+        movieTrailer = {},
+        loadingMovieTrailer,
     } = useGetSelectedMovie({
         movieId,
     });
+
     const { crew = [], cast = [] } = creditData;
+    const { results = [] } = movieTrailer;
+    const trailer = results.find((video) => video.type === "Trailer");
+
+    console.log(trailer, "trailer");
+
     const directorName = crew.reduce(
         (directorArray, director) =>
             director.job === "Director"
@@ -68,14 +76,31 @@ const MovieDetails = () => {
                 </div>
             ) : (
                 <div className={styles.description_container}>
-                    <div className={styles.poster_container}>
-                        <img
-                            src={`https://image.tmdb.org/t/p/w500${poster_path}`}
-                            alt={title}
-                            className={styles.poster}
-                        />
+                    <div className={styles.trailer_poster}>
+                        <div className={styles.poster_container}>
+                            <img
+                                src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+                                alt={title}
+                                className={styles.poster}
+                            />
+                        </div>
+                        {loadingMovieTrailer ? (
+                            <div className={styles.loader}>
+                                <strong>Loading...</strong>
+                            </div>
+                        ) : (
+                            <div>
+                                {trailer?.key && (
+                                    <iframe
+                                        title="Movie Trailer"
+                                        src={`https://www.youtube.com/embed/${trailer?.key}`}
+                                        className={styles.trailer}
+                                        allowFullScreen
+                                    />
+                                )}
+                            </div>
+                        )}
                     </div>
-
                     <div className={styles.details}>
                         <div className={styles.title}>
                             <h3>{title} </h3>

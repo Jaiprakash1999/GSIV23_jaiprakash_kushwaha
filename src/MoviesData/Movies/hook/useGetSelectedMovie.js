@@ -7,6 +7,9 @@ const useGetSelectedMovie = ({ movieId }) => {
     const [creditData, setCreditData] = useState({});
     const [loadingSearchResult, setLoadingSearchResult] = useState(true);
     const [creditDataLoading, setCreditDataLoading] = useState(true);
+    const [movieTrailer, setMovieTrailer] = useState({});
+    const [loadingMovieTrailer, setLoadingMovieTrailer] = useState(true);
+
     const getSearchResult = async () => {
         try {
             const response = await axios.get(
@@ -19,6 +22,12 @@ const useGetSelectedMovie = ({ movieId }) => {
             );
             setCreditData(creditResponse?.data);
             setCreditDataLoading(false);
+
+            const trailerResponse = await axios.get(
+                `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=be3ee1b68f89d61c2300f82023585fbc`
+            );
+            setMovieTrailer(trailerResponse?.data);
+            setLoadingMovieTrailer(false);
         } catch (error) {
             console.error(error, "Oops! Somthing went wrong");
             setLoadingSearchResult(false);
@@ -34,6 +43,8 @@ const useGetSelectedMovie = ({ movieId }) => {
         searchResult,
         creditData,
         creditDataLoading,
+        movieTrailer,
+        loadingMovieTrailer,
     };
 };
 export default useGetSelectedMovie;
