@@ -27,8 +27,6 @@ const MovieDetails = () => {
     const { results = [] } = movieTrailer;
     const trailer = results.find((video) => video.type === "Trailer");
 
-    console.log(trailer, "trailer");
-
     const directorName = crew.reduce(
         (directorArray, director) =>
             director.job === "Director"
